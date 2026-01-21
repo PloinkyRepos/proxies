@@ -1,0 +1,13 @@
+{
+  "container": "node:18-alpine",
+  "install": "/code/install.sh",
+  "start:": "cd kiro-gateway; python main.py",
+  "update": "",
+  "cli": "/bin/sh",
+  "about": "kiro Gateway",
+  "env": [
+    {
+      "name": "PROXY_API_KEY"
+    }
+  ]
+}
