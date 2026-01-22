@@ -2,3 +2,7 @@
 {"ts":"2026-01-22T12:41:55.901Z","level":"info","event":"spawning_server","pid":null,"managerPid":135288,"script":"/home/apparatus/work/file-parser/ploinky/cli/server/RoutingServer.js","attempt":1,"backoff":1000}
 {"ts":"2026-01-22T12:41:55.902Z","level":"info","event":"server_spawned","pid":135298,"managerPid":135288,"totalRestarts":0}
 {"ts":"2026-01-22T12:41:55.903Z","level":"info","event":"container_monitor_started","pid":135298,"managerPid":135288,"intervalMs":5000}
+{"ts":"2026-01-22T12:42:53.540Z","level":"warn","event":"process_exited","pid":135298,"managerPid":135288,"exitCode":0,"signal":null,"uptime":57639,"uptimeSeconds":57,"wasExpected":false}
+{"ts":"2026-01-22T12:42:53.540Z","level":"info","event":"clean_exit","pid":null,"managerPid":135288,"message":"Process exited cleanly, no restart needed"}
+{"ts":"2026-01-22T12:42:53.540Z","level":"info","event":"restart_skipped","pid":null,"managerPid":135288,"exitCode":0,"signal":null}
+{"ts":"2026-01-22T12:42:53.540Z","level":"info","event":"watchdog_exiting","pid":null,"managerPid":135288,"exitCode":0}
