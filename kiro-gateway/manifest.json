@@ -1,7 +1,7 @@
 {
   "container": "python:3.11-slim",
   "agent": "python /app/main.py",
-  "cli": "kiro-cli login --license pro --use-device-flow",
+  "cli": "kiro-cli login --license pro --identity-provider https://view.awsapps.com/start --use-device-flow",
   "about": "Kiro Gateway - OpenAI/Anthropic compatible proxy for Kiro API (Claude models via AWS CodeWhisperer)",
   "ports": [
     "0.0.0.0:8000:8000"
