@@ -7,10 +7,8 @@ if [ ! -d "/app" ]; then
 fi
 
 # Create .env from environment variables
-cat > /app/.env << EOF
-REFRESH_TOKEN=$REFRESH_TOKEN
-PROXY_API_KEY=$PROXY_API_KEY
-EOF
+echo "REFRESH_TOKEN=$REFRESH_TOKEN" > /app/.env
+[ -n "$PROXY_API_KEY" ] && echo "PROXY_API_KEY=$PROXY_API_KEY" >> /app/.env
 
 # Install dependencies
 cd /app
