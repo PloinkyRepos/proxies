@@ -15,15 +15,16 @@ if [ ! -d "/app" ]; then
     git clone https://github.com/jwadow/kiro-gateway.git /app
 fi
 
-# Check if already logged in, if not prompt for login
+# Check if already logged in
 KIRO_DB="/root/.local/share/kiro-cli/data.sqlite3"
 if [ ! -f "$KIRO_DB" ]; then
     echo ""
     echo "================================================"
-    echo "  Kiro CLI Login Required"
+    echo "  Authentication Required"
     echo "================================================"
-    echo ""
-    kiro-cli login --use-device-flow
+    echo "  Run: ploinky cli kiro-gateway"
+    echo "  to authenticate with your Kiro account"
+    echo "================================================"
     echo ""
 fi
 
