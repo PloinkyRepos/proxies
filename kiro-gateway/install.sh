@@ -1,14 +1,15 @@
 #!/bin/bash
 set -e
 
-# Add local bin to PATH (and persist for future shells)
+# Add local bin to PATH
 export PATH="$PATH:/root/.local/bin"
-echo 'export PATH="$PATH:/root/.local/bin"' >> /etc/profile
 
 # Install kiro-cli if not exists
 if ! command -v kiro-cli &> /dev/null; then
     echo "Installing kiro-cli..."
     curl -fsSL https://cli.kiro.dev/install | bash
+    # Create symlink so kiro-cli is in default PATH
+    ln -sf /root/.local/bin/kiro-cli /usr/local/bin/kiro-cli
 fi
 
 # Clone kiro-gateway repo if not exists
