@@ -1,9 +1,17 @@
-# Clone the repository (requires Git)
-git clone https://github.com/Jwadow/kiro-gateway.git
-cd kiro-gateway
+#!/bin/bash
+set -e
 
-# Or download ZIP: Code → Download ZIP → extract → open kiro-gateway folder
+# Clone kiro-gateway repo if not exists
+if [ ! -d "/app" ]; then
+    git clone https://github.com/jwadow/kiro-gateway.git /app
+fi
+
+# Create .env from environment variables
+cat > /app/.env << EOF
+REFRESH_TOKEN=$REFRESH_TOKEN
+PROXY_API_KEY=$PROXY_API_KEY
+EOF
 
 # Install dependencies
-pip install -r requirements.txt
-
+cd /app
+pip install -q -r requirements.txt

@@ -1,13 +1,17 @@
 {
-  "container": "node:18-alpine",
-  "install": "/code/install.sh",
-  "start:": "cd kiro-gateway; python main.py",
-  "update": "",
-  "cli": "/bin/sh",
-  "about": "kiro Gateway",
-  "env": [
-    {
-      "name": "PROXY_API_KEY"
+  "container": "python:3.11-slim",
+  "agent": "python /app/main.py",
+  "about": "Kiro Gateway - OpenAI/Anthropic compatible proxy for Kiro API (Claude models via AWS CodeWhisperer)",
+  "ports": [
+    "0.0.0.0:8000:8000"
+  ],
+  "profiles": {
+    "default": {
+      "env": [
+        "REFRESH_TOKEN"
+      ],
+      "preinstall": "apt-get update && apt-get install -y --no-install-recommends git && rm -rf /var/lib/apt/lists/*",
+      "install": "bash /code/install.sh"
     }
-  ]
+  }
 }
