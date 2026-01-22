@@ -1,15 +1,38 @@
 #!/bin/bash
 set -e
 
+# Add local bin to PATH
+export PATH="$PATH:/root/.local/bin"
+
+# Install kiro-cli if not exists
+if ! command -v kiro-cli &> /dev/null; then
+    echo "Installing kiro-cli..."
+    curl -fsSL https://cli.kiro.dev/install | bash
+fi
+
 # Clone kiro-gateway repo if not exists
 if [ ! -d "/app" ]; then
     git clone https://github.com/jwadow/kiro-gateway.git /app
 fi
 
-# Create .env from environment variables
-echo "REFRESH_TOKEN=$REFRESH_TOKEN" > /app/.env
+# Check if already logged in, if not prompt for login
+KIRO_DB="/root/.local/share/kiro-cli/data.sqlite3"
+if [ ! -f "$KIRO_DB" ]; then
+    echo ""
+    echo "================================================"
+    echo "  Kiro CLI Login Required"
+    echo "================================================"
+    echo ""
+    kiro-cli login
+    echo ""
+fi
+
+# Create .env with kiro-cli db path
+cat > /app/.env << EOF
+KIRO_CLI_DB_FILE=/root/.local/share/kiro-cli/data.sqlite3
+EOF
 [ -n "$PROXY_API_KEY" ] && echo "PROXY_API_KEY=$PROXY_API_KEY" >> /app/.env
 
-# Install dependencies
+# Install python dependencies
 cd /app
 pip install -q -r requirements.txt
