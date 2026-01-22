@@ -1,8 +1,9 @@
 #!/bin/bash
 set -e
 
-# Add local bin to PATH
+# Add local bin to PATH (and persist for future shells)
 export PATH="$PATH:/root/.local/bin"
+echo 'export PATH="$PATH:/root/.local/bin"' >> /etc/profile
 
 # Install kiro-cli if not exists
 if ! command -v kiro-cli &> /dev/null; then
