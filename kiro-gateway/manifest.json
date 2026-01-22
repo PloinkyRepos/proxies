@@ -8,7 +8,8 @@
   "profiles": {
     "default": {
       "env": [
-        "REFRESH_TOKEN"
+        "REFRESH_TOKEN",
+        "PROXY_API_KEY"
       ],
       "preinstall": "apt-get update && apt-get install -y --no-install-recommends git && rm -rf /var/lib/apt/lists/*",
       "install": "bash /code/install.sh"
