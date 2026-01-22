@@ -1,0 +1,4 @@
+{"ts":"2026-01-22T12:41:38.376Z","level":"debug","type":"server_stop","pid":132141,"signal":"SIGTERM","source":"port_scan","port":8080}
+{"ts":"2026-01-22T12:41:56.038Z","level":"debug","type":"server_start","port":8080}
+{"ts":"2026-01-22T12:41:56.039Z","level":"debug","type":"boot_operation","action":"server_listening","port":8080}
+{"ts":"2026-01-22T12:41:56.039Z","level":"debug","type":"memory_usage","rss":72110080,"heapTotal":20336640,"heapUsed":14301840,"external":3795297,"arrayBuffers":254971,"rssMB":69,"heapUsedMB":14}

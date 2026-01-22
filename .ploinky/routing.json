@@ -1,0 +1,17 @@
+{
+  "routes": {
+    "kiro-gateway": {
+      "container": "ploinky_proxies_kiro-gateway_kiro-gateway_84bbce81",
+      "hostPath": "/home/apparatus/work/kiro-gateway/.ploinky/repos/proxies/kiro-gateway",
+      "repo": "proxies",
+      "agent": "kiro-gateway",
+      "hostPort": 8000
+    }
+  },
+  "port": 8080,
+  "static": {
+    "agent": "kiro-gateway",
+    "container": "ploinky_proxies_kiro-gateway_kiro-gateway_84bbce81",
+    "hostPath": "/home/apparatus/work/kiro-gateway/.ploinky/repos/proxies/kiro-gateway"
+  }
+}

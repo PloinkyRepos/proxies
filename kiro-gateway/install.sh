@@ -23,7 +23,7 @@ if [ ! -f "$KIRO_DB" ]; then
     echo "  Kiro CLI Login Required"
     echo "================================================"
     echo ""
-    kiro-cli login
+    kiro-cli login --use-device-flow
     echo ""
 fi
 

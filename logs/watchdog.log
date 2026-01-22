@@ -1,0 +1,4 @@
+{"ts":"2026-01-22T12:41:55.899Z","level":"info","event":"process_manager_starting","pid":null,"managerPid":135288,"serverScript":"/home/apparatus/work/file-parser/ploinky/cli/server/RoutingServer.js","port":"8080","healthCheckEnabled":true,"maxRestartsInWindow":5,"restartWindowSeconds":60}
+{"ts":"2026-01-22T12:41:55.901Z","level":"info","event":"spawning_server","pid":null,"managerPid":135288,"script":"/home/apparatus/work/file-parser/ploinky/cli/server/RoutingServer.js","attempt":1,"backoff":1000}
+{"ts":"2026-01-22T12:41:55.902Z","level":"info","event":"server_spawned","pid":135298,"managerPid":135288,"totalRestarts":0}
+{"ts":"2026-01-22T12:41:55.903Z","level":"info","event":"container_monitor_started","pid":135298,"managerPid":135288,"intervalMs":5000}
