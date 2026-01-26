@@ -14,8 +14,7 @@
     },
     "profiles": {
         "default": {
-            "preinstall": "apt-get update && apt-get install -y --no-install-recommends git curl unzip && rm -rf /var/lib/apt/lists/*",
-            "install": "bash /code/install.sh"
+            "install": "apt-get update && apt-get install -y --no-install-recommends git curl unzip && rm -rf /var/lib/apt/lists/* && bash /code/install.sh"
         }
     }
 }
