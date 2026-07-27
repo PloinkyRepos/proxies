@@ -50,7 +50,7 @@ jobs:
           echo ""
           echo "=== Soul Gateway Health Check ==="
           ROUTER_URL="${PLOINKY_ROUTER_URL:-http://localhost:${ROUTER_PORT:-8080}}"
-          curl -s "${ROUTER_URL%/}/public-services/soul-gateway-health/" 2>/dev/null || echo "Soul Gateway public health service not reachable through Ploinky router"
+          curl -s "${ROUTER_URL%/}/base-agent-additional-server/soul-gateway/7000/healthz/" 2>/dev/null || echo "Soul Gateway public health route not reachable through Ploinky router"
 
           echo ""
           echo "=== Container Logs (last 20 lines) ==="
@@ -98,7 +98,7 @@ jobs:
           ploinky status
           echo ""
           ROUTER_URL="${PLOINKY_ROUTER_URL:-http://localhost:${ROUTER_PORT:-8080}}"
-          curl -s "${ROUTER_URL%/}/public-services/soul-gateway-health/" 2>/dev/null || echo "Soul Gateway public health service not reachable yet"
+          curl -s "${ROUTER_URL%/}/base-agent-additional-server/soul-gateway/7000/healthz/" 2>/dev/null || echo "Soul Gateway public health route not reachable yet"
           EOF
 
       # ─── DEPLOY ─────────────────────────────────────────────────
@@ -140,7 +140,7 @@ jobs:
           BASIC_REPO="https://github.com/AssistOS-AI/Basic.git"
           CODE_DIR="$HOME/code"
           ROUTER_URL="${PLOINKY_ROUTER_URL:-http://localhost:${ROUTER_PORT:-8080}}"
-          HEALTH_URL="${ROUTER_URL%/}/public-services/soul-gateway-health/"
+          HEALTH_URL="${ROUTER_URL%/}/base-agent-additional-server/soul-gateway/7000/healthz/"
           PLOINKY_ADMIN_USER="${PLOINKY_ADMIN_USER:-admin}"
 
           if [ -z "$PLOINKY_ADMIN_PASSWORD" ]; then
