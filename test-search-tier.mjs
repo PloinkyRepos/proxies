@@ -47,7 +47,6 @@ async function main() {
                 headers: {
                     Authorization: `Bearer ${SOUL_KEY}`,
                     'Content-Type': 'application/json',
-                    'X-Soul-Agent': 'search-tier-test',
                 },
                 body: JSON.stringify({
                     model,
