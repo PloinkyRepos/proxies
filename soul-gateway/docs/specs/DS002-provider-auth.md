@@ -64,7 +64,7 @@ Conversation order and roles are preserved across that boundary. OpenAI-compatib
 
 Request-time LLM inference and embedding provider calls must go through `achillesAgentLib`. Soul Gateway owns routing, provider/account selection, credential leasing, middleware policy, quota/budget enforcement, observability, and conversion from Achilles output into gateway canonical streams. It must not own vendor-specific completion/generation transports for LLM protocol families (OpenAI, Anthropic, Gemini, Copilot, Kiro, etc.) or OpenAI-compatible embeddings transport.
 
-The canonical Achilles source for this workspace is `/Users/danielsava/work/file-parser/ploinky/node_modules/achillesAgentLib`.
+The canonical Achilles source for this workspace is `${WORKSPACE_ROOT}/ploinky/node_modules/achillesAgentLib`.
 
 Lifecycle probes and model discovery are outside the request-time inference path. They may use direct vendor HTTP when they are validating provider connectivity or syncing catalog metadata, provided they use the credential lease for the target provider and do not implement an alternate completion/generation path. Prefer Achilles helpers for lifecycle calls when the relevant provider module exposes them.
 

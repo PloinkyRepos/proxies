@@ -12,25 +12,25 @@
 
 ## File Structure
 
-`/Users/danielsava/work/file-parser/ploinky/cli/services/userIdentityKey.js`
+`${WORKSPACE_ROOT}/ploinky/cli/services/userIdentityKey.js`
 : Owns router user-key result creation. Add the public `sk-soul-` wrapper at the user-key mint boundary.
 
-`/Users/danielsava/work/file-parser/ploinky/tests/unit/userIdentityKey.test.mjs`
+`${WORKSPACE_ROOT}/ploinky/tests/unit/userIdentityKey.test.mjs`
 : Proves Ploinky returns encoded user-facing API keys, keeps admin/non-admin target rules, and that the encoded payload verifies after decoding.
 
-`/Users/danielsava/work/file-parser/proxies/soul-gateway/src/test/fixtures/signed-subject-key.mjs`
+`${WORKSPACE_ROOT}/proxies/soul-gateway/src/test/fixtures/signed-subject-key.mjs`
 : Test-only helper for wrapping raw signed-subject keys as `sk-soul-...`.
 
-`/Users/danielsava/work/file-parser/proxies/soul-gateway/src/test/unit/embedded-auth.test.mjs`
+`${WORKSPACE_ROOT}/proxies/soul-gateway/src/test/unit/embedded-auth.test.mjs`
 : Proves Soul Gateway accepts encoded user keys, rejects raw user keys, rejects malformed encoded keys, rejects encoded agent subjects, and keeps raw agent keys working.
 
-`/Users/danielsava/work/file-parser/proxies/soul-gateway/src/runtime/security/api-key-auth.mjs`
+`${WORKSPACE_ROOT}/proxies/soul-gateway/src/runtime/security/api-key-auth.mjs`
 : Add inbound token parsing that unwraps `sk-soul-...` user keys and rejects raw user signed-subject tokens.
 
-`/Users/danielsava/work/file-parser/proxies/soul-gateway/docs/specs/DS002-provider-auth.md`
-`/Users/danielsava/work/file-parser/proxies/soul-gateway/docs/specs/DS007-rate-limiting-budgets.md`
-`/Users/danielsava/work/file-parser/proxies/soul-gateway/docs/specs/DS012-api-reference.md`
-`/Users/danielsava/work/file-parser/proxies/soul-gateway/docs/specs/DS016-ploinky-agent-mode.md`
+`${WORKSPACE_ROOT}/proxies/soul-gateway/docs/specs/DS002-provider-auth.md`
+`${WORKSPACE_ROOT}/proxies/soul-gateway/docs/specs/DS007-rate-limiting-budgets.md`
+`${WORKSPACE_ROOT}/proxies/soul-gateway/docs/specs/DS012-api-reference.md`
+`${WORKSPACE_ROOT}/proxies/soul-gateway/docs/specs/DS016-ploinky-agent-mode.md`
 : Update current behavior docs to describe encoded user keys and raw agent keys.
 
 ## Execution Setup
@@ -38,8 +38,8 @@
 - [ ] **Step 1: Create isolated worktrees for both repos**
 
 ```bash
-git -C /Users/danielsava/work/file-parser/proxies worktree add /Users/danielsava/work/file-parser/proxies/.worktrees/encoded-user-api-keys -b fix/encoded-user-api-keys
-git -C /Users/danielsava/work/file-parser/ploinky worktree add /Users/danielsava/work/file-parser/ploinky/.worktrees/encoded-user-api-keys -b fix/encoded-user-api-keys
+git -C ${WORKSPACE_ROOT}/proxies worktree add ${WORKSPACE_ROOT}/proxies/.worktrees/encoded-user-api-keys -b fix/encoded-user-api-keys
+git -C ${WORKSPACE_ROOT}/ploinky worktree add ${WORKSPACE_ROOT}/ploinky/.worktrees/encoded-user-api-keys -b fix/encoded-user-api-keys
 ```
 
 Expected: two worktrees created on `fix/encoded-user-api-keys`. If `.worktrees` is not ignored in either repo, stop and add the ignore entry in that repo before creating the worktree.
@@ -47,10 +47,10 @@ Expected: two worktrees created on `fix/encoded-user-api-keys`. If `.worktrees` 
 - [ ] **Step 2: Record baseline targeted tests**
 
 ```bash
-cd /Users/danielsava/work/file-parser/ploinky/.worktrees/encoded-user-api-keys
+cd ${WORKSPACE_ROOT}/ploinky/.worktrees/encoded-user-api-keys
 node --test tests/unit/userIdentityKey.test.mjs
 
-cd /Users/danielsava/work/file-parser/proxies/.worktrees/encoded-user-api-keys/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/.worktrees/encoded-user-api-keys/soul-gateway
 node --experimental-test-module-mocks --test src/test/unit/embedded-auth.test.mjs src/test/unit/dashboard-keys-page.test.mjs
 ```
 
@@ -60,7 +60,7 @@ Expected: both commands pass before changing tests. If a baseline fails, capture
 
 **Files:**
 
-- Modify: `/Users/danielsava/work/file-parser/ploinky/.worktrees/encoded-user-api-keys/tests/unit/userIdentityKey.test.mjs`
+- Modify: `${WORKSPACE_ROOT}/ploinky/.worktrees/encoded-user-api-keys/tests/unit/userIdentityKey.test.mjs`
 
 - [ ] **Step 1: Add a test helper that decodes the public key wrapper**
 
@@ -162,7 +162,7 @@ In `the pure buildUserApiKeyResult enforces the privilege model directly`, repla
 - [ ] **Step 3: Run the Ploinky test to verify RED**
 
 ```bash
-cd /Users/danielsava/work/file-parser/ploinky/.worktrees/encoded-user-api-keys
+cd ${WORKSPACE_ROOT}/ploinky/.worktrees/encoded-user-api-keys
 node --test tests/unit/userIdentityKey.test.mjs
 ```
 
@@ -172,8 +172,8 @@ Expected: FAIL because `result.body.apiKey` currently starts with `user:` instea
 
 **Files:**
 
-- Modify: `/Users/danielsava/work/file-parser/ploinky/.worktrees/encoded-user-api-keys/cli/services/userIdentityKey.js`
-- Test: `/Users/danielsava/work/file-parser/ploinky/.worktrees/encoded-user-api-keys/tests/unit/userIdentityKey.test.mjs`
+- Modify: `${WORKSPACE_ROOT}/ploinky/.worktrees/encoded-user-api-keys/cli/services/userIdentityKey.js`
+- Test: `${WORKSPACE_ROOT}/ploinky/.worktrees/encoded-user-api-keys/tests/unit/userIdentityKey.test.mjs`
 
 - [ ] **Step 1: Add the public wrapper helper**
 
@@ -209,7 +209,7 @@ with:
 - [ ] **Step 3: Run the targeted Ploinky test to verify GREEN**
 
 ```bash
-cd /Users/danielsava/work/file-parser/ploinky/.worktrees/encoded-user-api-keys
+cd ${WORKSPACE_ROOT}/ploinky/.worktrees/encoded-user-api-keys
 node --test tests/unit/userIdentityKey.test.mjs
 ```
 
@@ -218,7 +218,7 @@ Expected: PASS.
 - [ ] **Step 4: Commit Ploinky changes**
 
 ```bash
-cd /Users/danielsava/work/file-parser/ploinky/.worktrees/encoded-user-api-keys
+cd ${WORKSPACE_ROOT}/ploinky/.worktrees/encoded-user-api-keys
 git add cli/services/userIdentityKey.js tests/unit/userIdentityKey.test.mjs
 git commit -m "feat: encode user api keys"
 ```
@@ -227,8 +227,8 @@ git commit -m "feat: encode user api keys"
 
 **Files:**
 
-- Modify: `/Users/danielsava/work/file-parser/proxies/.worktrees/encoded-user-api-keys/soul-gateway/src/test/fixtures/signed-subject-key.mjs`
-- Modify: `/Users/danielsava/work/file-parser/proxies/.worktrees/encoded-user-api-keys/soul-gateway/src/test/unit/embedded-auth.test.mjs`
+- Modify: `${WORKSPACE_ROOT}/proxies/.worktrees/encoded-user-api-keys/soul-gateway/src/test/fixtures/signed-subject-key.mjs`
+- Modify: `${WORKSPACE_ROOT}/proxies/.worktrees/encoded-user-api-keys/soul-gateway/src/test/unit/embedded-auth.test.mjs`
 
 - [ ] **Step 1: Add encoded user-key test helpers**
 
@@ -384,7 +384,7 @@ Add these tests near the other signed-subject API key tests, before `does not re
 - [ ] **Step 5: Run the Soul Gateway auth test to verify RED**
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/.worktrees/encoded-user-api-keys/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/.worktrees/encoded-user-api-keys/soul-gateway
 node --experimental-test-module-mocks --test src/test/unit/embedded-auth.test.mjs
 ```
 
@@ -394,8 +394,8 @@ Expected: FAIL because encoded `sk-soul-...` keys are not decoded yet and raw us
 
 **Files:**
 
-- Modify: `/Users/danielsava/work/file-parser/proxies/.worktrees/encoded-user-api-keys/soul-gateway/src/runtime/security/api-key-auth.mjs`
-- Test: `/Users/danielsava/work/file-parser/proxies/.worktrees/encoded-user-api-keys/soul-gateway/src/test/unit/embedded-auth.test.mjs`
+- Modify: `${WORKSPACE_ROOT}/proxies/.worktrees/encoded-user-api-keys/soul-gateway/src/runtime/security/api-key-auth.mjs`
+- Test: `${WORKSPACE_ROOT}/proxies/.worktrees/encoded-user-api-keys/soul-gateway/src/test/unit/embedded-auth.test.mjs`
 
 - [ ] **Step 1: Add encoded user-key constants**
 
@@ -481,7 +481,7 @@ export function decodeEncodedUserApiKey(token) {
 - [ ] **Step 4: Run the Soul Gateway auth test to verify GREEN**
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/.worktrees/encoded-user-api-keys/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/.worktrees/encoded-user-api-keys/soul-gateway
 node --experimental-test-module-mocks --test src/test/unit/embedded-auth.test.mjs
 ```
 
@@ -490,7 +490,7 @@ Expected: PASS.
 - [ ] **Step 5: Commit Soul Gateway verifier changes**
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/.worktrees/encoded-user-api-keys
+cd ${WORKSPACE_ROOT}/proxies/.worktrees/encoded-user-api-keys
 git add soul-gateway/src/runtime/security/api-key-auth.mjs soul-gateway/src/test/fixtures/signed-subject-key.mjs soul-gateway/src/test/unit/embedded-auth.test.mjs
 git commit -m "feat: require encoded user api keys"
 ```
@@ -499,7 +499,7 @@ git commit -m "feat: require encoded user api keys"
 
 **Files:**
 
-- Modify: `/Users/danielsava/work/file-parser/proxies/.worktrees/encoded-user-api-keys/soul-gateway/src/test/unit/dashboard-keys-page.test.mjs`
+- Modify: `${WORKSPACE_ROOT}/proxies/.worktrees/encoded-user-api-keys/soul-gateway/src/test/unit/dashboard-keys-page.test.mjs`
 
 - [ ] **Step 1: Write a dashboard unit test for the revealed key shape**
 
@@ -591,7 +591,7 @@ Append this test inside `describe('dashboard keys page', () => { ... })`:
 - [ ] **Step 2: Run the dashboard keys test**
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/.worktrees/encoded-user-api-keys/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/.worktrees/encoded-user-api-keys/soul-gateway
 node --experimental-test-module-mocks --test src/test/unit/dashboard-keys-page.test.mjs
 ```
 
@@ -600,7 +600,7 @@ Expected: PASS. This is a regression guard for existing dashboard pass-through b
 - [ ] **Step 3: Commit the dashboard regression test**
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/.worktrees/encoded-user-api-keys
+cd ${WORKSPACE_ROOT}/proxies/.worktrees/encoded-user-api-keys
 git add soul-gateway/src/test/unit/dashboard-keys-page.test.mjs
 git commit -m "test: cover encoded user key reveal"
 ```
@@ -609,10 +609,10 @@ git commit -m "test: cover encoded user key reveal"
 
 **Files:**
 
-- Modify: `/Users/danielsava/work/file-parser/proxies/.worktrees/encoded-user-api-keys/soul-gateway/docs/specs/DS002-provider-auth.md`
-- Modify: `/Users/danielsava/work/file-parser/proxies/.worktrees/encoded-user-api-keys/soul-gateway/docs/specs/DS007-rate-limiting-budgets.md`
-- Modify: `/Users/danielsava/work/file-parser/proxies/.worktrees/encoded-user-api-keys/soul-gateway/docs/specs/DS012-api-reference.md`
-- Modify: `/Users/danielsava/work/file-parser/proxies/.worktrees/encoded-user-api-keys/soul-gateway/docs/specs/DS016-ploinky-agent-mode.md`
+- Modify: `${WORKSPACE_ROOT}/proxies/.worktrees/encoded-user-api-keys/soul-gateway/docs/specs/DS002-provider-auth.md`
+- Modify: `${WORKSPACE_ROOT}/proxies/.worktrees/encoded-user-api-keys/soul-gateway/docs/specs/DS007-rate-limiting-budgets.md`
+- Modify: `${WORKSPACE_ROOT}/proxies/.worktrees/encoded-user-api-keys/soul-gateway/docs/specs/DS012-api-reference.md`
+- Modify: `${WORKSPACE_ROOT}/proxies/.worktrees/encoded-user-api-keys/soul-gateway/docs/specs/DS016-ploinky-agent-mode.md`
 
 - [ ] **Step 1: Update DS002 inbound API key authentication**
 
@@ -701,7 +701,7 @@ Add a new decision:
 - [ ] **Step 5: Commit docs**
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/.worktrees/encoded-user-api-keys
+cd ${WORKSPACE_ROOT}/proxies/.worktrees/encoded-user-api-keys
 git add soul-gateway/docs/specs/DS002-provider-auth.md soul-gateway/docs/specs/DS007-rate-limiting-budgets.md soul-gateway/docs/specs/DS012-api-reference.md soul-gateway/docs/specs/DS016-ploinky-agent-mode.md
 git commit -m "docs: document encoded user api keys"
 ```
@@ -715,7 +715,7 @@ git commit -m "docs: document encoded user api keys"
 - [ ] **Step 1: Run targeted Ploinky tests**
 
 ```bash
-cd /Users/danielsava/work/file-parser/ploinky/.worktrees/encoded-user-api-keys
+cd ${WORKSPACE_ROOT}/ploinky/.worktrees/encoded-user-api-keys
 node --test tests/unit/userIdentityKey.test.mjs
 ```
 
@@ -724,7 +724,7 @@ Expected: PASS.
 - [ ] **Step 2: Run targeted Soul Gateway tests**
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/.worktrees/encoded-user-api-keys/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/.worktrees/encoded-user-api-keys/soul-gateway
 node --experimental-test-module-mocks --test src/test/unit/embedded-auth.test.mjs src/test/unit/dashboard-keys-page.test.mjs
 ```
 
@@ -733,7 +733,7 @@ Expected: PASS.
 - [ ] **Step 3: Run full Soul Gateway unit tests**
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/.worktrees/encoded-user-api-keys/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/.worktrees/encoded-user-api-keys/soul-gateway
 npm run test:unit
 ```
 
@@ -742,7 +742,7 @@ Expected: PASS.
 - [ ] **Step 4: Run Ploinky unit suite**
 
 ```bash
-cd /Users/danielsava/work/file-parser/ploinky/.worktrees/encoded-user-api-keys
+cd ${WORKSPACE_ROOT}/ploinky/.worktrees/encoded-user-api-keys
 npm test
 ```
 
@@ -753,10 +753,10 @@ Expected: PASS, or document any pre-existing unrelated failure with the exact fa
 After review approves both repos:
 
 ```bash
-cd /Users/danielsava/work/file-parser/ploinky
+cd ${WORKSPACE_ROOT}/ploinky
 git merge --ff-only fix/encoded-user-api-keys
 
-cd /Users/danielsava/work/file-parser/proxies
+cd ${WORKSPACE_ROOT}/proxies
 git merge --ff-only fix/encoded-user-api-keys
 ```
 
@@ -765,7 +765,7 @@ Expected: both merges fast-forward.
 - [ ] **Step 6: Redeploy fresh local Explorer**
 
 ```bash
-cd /Users/danielsava/work/testExplorerFresh
+cd ${TEST_WORKSPACE}
 ploinky destroy
 rm -rf .ploinky
 ploinky start explorer
@@ -825,10 +825,10 @@ Raw decoded user key curl returns 401 or 403 with invalid_api_key semantics
 - [ ] **Step 9: Push both repos after verification**
 
 ```bash
-cd /Users/danielsava/work/file-parser/ploinky
+cd ${WORKSPACE_ROOT}/ploinky
 git push origin master
 
-cd /Users/danielsava/work/file-parser/proxies
+cd ${WORKSPACE_ROOT}/proxies
 git push origin main
 ```
 

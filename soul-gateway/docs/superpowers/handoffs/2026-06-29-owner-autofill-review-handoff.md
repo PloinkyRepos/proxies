@@ -117,7 +117,7 @@ Docs:
 Focused verification:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 node --test src/test/unit/management-user.test.mjs
 node --experimental-test-module-mocks --test src/test/unit/management.test.mjs
 node --test src/test/unit/dashboard-keys-page.test.mjs
@@ -134,7 +134,7 @@ dashboard-keys-page.test.mjs: 4 pass, 0 fail
 Full verification:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 npm test
 ```
 
@@ -147,7 +147,7 @@ Observed result:
 Whitespace check:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 git diff --check HEAD~4..HEAD
 ```
 
@@ -165,7 +165,7 @@ Minor notes worth rechecking:
 ## Suggested Review Commands
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 git status --short
 git diff --stat f50bde0..b3acaf8
 git diff f50bde0..b3acaf8

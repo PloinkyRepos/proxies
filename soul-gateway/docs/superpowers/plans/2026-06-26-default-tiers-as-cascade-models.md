@@ -13,9 +13,9 @@
 ## Execution Preconditions
 
 - Work from an isolated worktree/branch at implementation time. Do not implement directly on `main` unless the user explicitly asks.
-- Read `/Users/danielsava/work/file-parser/CLAUDE.md`, `/Users/danielsava/work/file-parser/proxies/CLAUDE.md`, and `/Users/danielsava/work/file-parser/proxies/soul-gateway/CLAUDE.md` before editing.
+- Read `${WORKSPACE_ROOT}/CLAUDE.md`, `${WORKSPACE_ROOT}/proxies/CLAUDE.md`, and `${WORKSPACE_ROOT}/proxies/soul-gateway/CLAUDE.md` before editing.
 - Use `superpowers:test-driven-development` before production-code edits.
-- Keep scope inside `/Users/danielsava/work/file-parser/proxies/soul-gateway` unless verification proves another repo is required.
+- Keep scope inside `${WORKSPACE_ROOT}/proxies/soul-gateway` unless verification proves another repo is required.
 - Do not change the Ploinky router or the public API wire format for this task.
 
 ## Current Root Cause
@@ -97,7 +97,7 @@ const expected = [
 Run:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 node --test src/test/unit/dao-queries.test.mjs
 ```
 
@@ -161,7 +161,7 @@ export async function deleteByAlias(pool, alias) {
 Run:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 node --test src/test/unit/dao-queries.test.mjs
 ```
 
@@ -673,7 +673,7 @@ describe('seedDefaultTiers', () => {
 Run:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 node --test src/test/unit/seed-default-tiers.test.mjs
 ```
 
@@ -885,7 +885,7 @@ export async function seedDefaultTiers({
 Run:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 node --test src/test/unit/seed-default-tiers.test.mjs
 ```
 
@@ -896,7 +896,7 @@ Expected: PASS.
 Run:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 node --test \
   src/test/unit/seed-default-tiers.test.mjs \
   src/test/unit/dao-queries.test.mjs \
@@ -963,7 +963,7 @@ defaults to a remote gateway.
 Run:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 rg -n "tier aliases|aliases named in LLM_DEFAULT_TIERS|seedDefaultTiers.*alias" docs/specs src/bootstrap src/test/unit
 ```
 
@@ -988,7 +988,7 @@ git commit -m "docs: clarify default tier cascade seeding"
 Run:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 node --test \
   src/test/unit/seed-default-tiers.test.mjs \
   src/test/unit/dao-queries.test.mjs \
@@ -1004,7 +1004,7 @@ Expected: PASS.
 Run:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 npm run test:unit
 ```
 
@@ -1012,10 +1012,10 @@ Expected: PASS.
 
 - [ ] **Step 3: Restart the local Soul Gateway agent**
 
-Restart the local `proxies/soul-gateway` agent in the active Ploinky workspace so the updated seeder runs at startup or on the next discovery pass. Use the workspace's normal restart command. One acceptable path from `/Users/danielsava/work/testExplorerFresh` is:
+Restart the local `proxies/soul-gateway` agent in the active Ploinky workspace so the updated seeder runs at startup or on the next discovery pass. Use the workspace's normal restart command. One acceptable path from `${TEST_WORKSPACE}` is:
 
 ```bash
-cd /Users/danielsava/work/testExplorerFresh
+cd ${TEST_WORKSPACE}
 ploinky restart soul-gateway
 ```
 

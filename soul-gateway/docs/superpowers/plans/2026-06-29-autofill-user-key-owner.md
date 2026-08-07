@@ -112,7 +112,7 @@ describe('management user key owner helpers', () => {
 Command:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 node --test src/test/unit/management-user.test.mjs
 ```
 
@@ -180,7 +180,7 @@ export function managementUserView(managementAuth = {}) {
 Command:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 node --test src/test/unit/management-user.test.mjs
 ```
 
@@ -272,7 +272,7 @@ If the exact helper signatures differ, adapt only the setup to the existing test
 Command:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 node --experimental-test-module-mocks --test src/test/unit/management.test.mjs
 ```
 
@@ -334,7 +334,7 @@ httpRouter.add('GET', '/management/me', admin(handleManagementMe));
 Command:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 node --test src/test/unit/management-user.test.mjs
 node --experimental-test-module-mocks --test src/test/unit/management.test.mjs
 ```
@@ -346,7 +346,7 @@ Expected outcome: both commands pass.
 Command:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 git status --short
 git add src/management/management-user.mjs src/management/session-route.mjs src/management/build-routes.mjs src/test/unit/management-user.test.mjs src/test/unit/management.test.mjs
 git commit -m "Expose management current user"
@@ -422,7 +422,7 @@ If local helper names differ, use the existing test helpers in that file. Keep t
 Command:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 node --test src/test/unit/dashboard-keys-page.test.mjs
 ```
 
@@ -502,7 +502,7 @@ Keep the existing validation and payload shape unchanged after that line. The ke
 Command:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 node --test src/test/unit/dashboard-keys-page.test.mjs
 ```
 
@@ -513,7 +513,7 @@ Expected outcome: the new dashboard owner autofill test passes with the existing
 Command:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 git status --short
 git add src/dashboard/js/app.mjs src/test/unit/dashboard-keys-page.test.mjs
 git commit -m "Autofill user key owner"
@@ -568,7 +568,7 @@ Soul Gateway preserves the verified Ploinky user from `x-ploinky-auth-info` on m
 Command:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 git diff -- docs/specs/DS012-api-reference.md docs/specs/DS016-ploinky-agent-mode.md
 ```
 
@@ -579,7 +579,7 @@ Expected outcome: the diff describes only the new current-user endpoint and owne
 Command:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 git status --short
 git add docs/specs/DS012-api-reference.md docs/specs/DS016-ploinky-agent-mode.md
 git commit -m "Document management user owner defaults"
@@ -596,7 +596,7 @@ Expected outcome: commit succeeds with only docs files staged.
 Command:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 node --test src/test/unit/management-user.test.mjs
 node --experimental-test-module-mocks --test src/test/unit/management.test.mjs
 node --test src/test/unit/dashboard-keys-page.test.mjs
@@ -609,7 +609,7 @@ Expected outcome: all focused tests pass.
 Command:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 npm test
 ```
 
@@ -620,7 +620,7 @@ Expected outcome: the full suite passes.
 Command:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 git diff --check
 ```
 
@@ -631,7 +631,7 @@ Expected outcome: no whitespace errors.
 Command:
 
 ```bash
-cd /Users/danielsava/work/testExplorerFresh
+cd ${TEST_WORKSPACE}
 ploinky destroy
 rm -rf .ploinky
 ploinky start explorer
@@ -655,7 +655,7 @@ Manual expected outcome:
 Command:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 git status --short
 git diff HEAD~3..HEAD -- src/management src/dashboard/js/app.mjs src/test/unit docs/specs
 ```
@@ -667,7 +667,7 @@ Expected outcome: changes are limited to management current-user context, keys o
 Command:
 
 ```bash
-cd /Users/danielsava/work/file-parser/proxies/soul-gateway
+cd ${WORKSPACE_ROOT}/proxies/soul-gateway
 git log --oneline -3
 ```
 
@@ -684,7 +684,7 @@ Document management user owner defaults
 Command:
 
 ```bash
-cd /Users/danielsava/work/file-parser
+cd ${WORKSPACE_ROOT}
 git status --short
 git branch --show-current
 git push origin main

@@ -6,12 +6,12 @@ Paste the prompt below into Claude Code from this workspace:
 You are reviewing a candidate Soul Gateway fix. This is a review-only task.
 
 Workspace:
-/Users/danielsava/work/file-parser/proxies/soul-gateway
+${WORKSPACE_ROOT}/proxies/soul-gateway
 
 Read the repository instructions first:
-- /Users/danielsava/work/file-parser/CLAUDE.md
-- /Users/danielsava/work/file-parser/proxies/CLAUDE.md
-- /Users/danielsava/work/file-parser/proxies/soul-gateway/CLAUDE.md
+- ${WORKSPACE_ROOT}/CLAUDE.md
+- ${WORKSPACE_ROOT}/proxies/CLAUDE.md
+- ${WORKSPACE_ROOT}/proxies/soul-gateway/CLAUDE.md
 
 Do not edit files.
 Do not stage files.

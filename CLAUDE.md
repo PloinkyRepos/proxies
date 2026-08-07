@@ -15,7 +15,7 @@ Soul Gateway runs as a Ploinky-managed agent behind Router agent-port convention
 
 Key invariant:
 
-- Request-time LLM inference must go through `/Users/danielsava/work/file-parser/ploinky/node_modules/achillesAgentLib`. Soul Gateway lifecycle probes and model discovery may use direct vendor HTTP when validating providers or syncing catalogs. Search providers are normal OpenAI-compatible models exposed by Soul Gateway; external callers reach them through `achillesAgentLib` the same way they reach LLM models. Soul Gateway search backends own provider-specific execution for both API search and headless-browser search behind the standard model interface.
+- Request-time LLM inference must go through `${WORKSPACE_ROOT}/ploinky/node_modules/achillesAgentLib`. Soul Gateway lifecycle probes and model discovery may use direct vendor HTTP when validating providers or syncing catalogs. Search providers are normal OpenAI-compatible models exposed by Soul Gateway; external callers reach them through `achillesAgentLib` the same way they reach LLM models. Soul Gateway search backends own provider-specific execution for both API search and headless-browser search behind the standard model interface.
 
 Code conventions:
 

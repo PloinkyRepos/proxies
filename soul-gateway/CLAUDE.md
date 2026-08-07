@@ -30,7 +30,7 @@ Search providers are normal OpenAI-compatible models exposed by Soul Gateway. Ex
 The canonical Achilles source for this workspace is:
 
 ```text
-/Users/danielsava/work/file-parser/ploinky/node_modules/achillesAgentLib
+${WORKSPACE_ROOT}/ploinky/node_modules/achillesAgentLib
 ```
 
 When adding a new LLM provider protocol family, implement the provider transport in `achillesAgentLib` first. When adding a new search provider, implement it as a Soul Gateway search backend behind the same OpenAI-compatible model surface.
