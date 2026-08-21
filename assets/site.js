@@ -67,21 +67,24 @@ function closeMenus({ returnFocus = false } = {}) {
     });
 }
 
-function referenceItems(root, agent) {
+function documentationItems(root, agent) {
     if (agent === 'searchAgent') {
         return [
+            ['SearchAgent Home', link(root, 'searchAgent/docs/index.html')],
             ['Specifications', link(root, 'searchAgent/docs/specsLoader.html?spec=matrix.md')],
             ['Wiki', link(root, 'searchAgent/docs/wiki.html')],
         ];
     }
     if (agent === 'default-local-llm') {
         return [
+            ['Default Local LLM Home', link(root, 'default-local-llm/docs/index.html')],
             ['Specifications', link(root, 'default-local-llm/docs/specsLoader.html?spec=matrix.md')],
             ['Wiki', link(root, 'default-local-llm/docs/wiki.html')],
         ];
     }
     if (agent === 'soul-gateway') {
         return [
+            ['Soul Gateway Home', link(root, 'soul-gateway/docs/index.html')],
             ['Specifications', link(root, 'soul-gateway/docs/specsLoader.html?spec=matrix.md')],
             ['Wiki', link(root, 'soul-gateway/docs/wiki.html')],
         ];
@@ -104,12 +107,13 @@ function renderHeader() {
     const nav = document.createElement('nav');
     nav.className = 'nav';
     nav.setAttribute('aria-label', 'Primary documentation navigation');
-    nav.append(
-        menu('Site', [['Site Home', link(root, 'index.html')]], window.location.pathname),
-        menu('Agents', agents.map(([label, path]) => [label, link(root, path)]), window.location.pathname),
-    );
-    const references = referenceItems(root, agent);
-    if (references.length) nav.append(menu('Reference', references, window.location.pathname));
+    const repositoryItems = [
+        ['Repository Home', link(root, 'index.html')],
+        ...agents.map(([label, path]) => [label, link(root, path)]),
+    ];
+    nav.append(menu('Repository', repositoryItems, window.location.pathname));
+    const documentation = documentationItems(root, agent);
+    if (documentation.length) nav.append(menu('Documentation', documentation, window.location.pathname));
     inner.append(brand, nav);
     header.replaceChildren(inner);
 }
