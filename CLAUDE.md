@@ -5,13 +5,15 @@ This repository contains proxy and gateway services, including Soul Gateway in `
 For Soul Gateway work, read:
 
 - [soul-gateway/AGENTS.md](soul-gateway/AGENTS.md)
-- [soul-gateway/docs/specs/README.md](soul-gateway/docs/specs/README.md)
-- [soul-gateway/docs/specs/DS001-request-pipeline.md](soul-gateway/docs/specs/DS001-request-pipeline.md)
-- [soul-gateway/docs/specs/DS002-provider-auth.md](soul-gateway/docs/specs/DS002-provider-auth.md)
-- [soul-gateway/docs/specs/DS003-middleware-framework.md](soul-gateway/docs/specs/DS003-middleware-framework.md)
-- [soul-gateway/docs/specs/DS013-configuration-deployment.md](soul-gateway/docs/specs/DS013-configuration-deployment.md)
+- [soul-gateway/docs/index.html](soul-gateway/docs/index.html)
+- [soul-gateway/docs/wiki.html](soul-gateway/docs/wiki.html)
+- [soul-gateway/docs/specs/matrix.md](soul-gateway/docs/specs/matrix.md)
+- [soul-gateway/docs/specs/DS001-coding-style.md](soul-gateway/docs/specs/DS001-coding-style.md)
+- [soul-gateway/docs/specs/DS002-model-strategy.md](soul-gateway/docs/specs/DS002-model-strategy.md)
+- [soul-gateway/docs/specs/DS003-main-behavior.md](soul-gateway/docs/specs/DS003-main-behavior.md)
+- [soul-gateway/docs/specs/DS012-ploinky-deployment.md](soul-gateway/docs/specs/DS012-ploinky-deployment.md)
 
-Soul Gateway runs as a Ploinky-managed agent behind Router agent-port convention paths in every host context. Public API traffic goes through the Ploinky router and still uses Soul Gateway API keys; management traffic is protected by Ploinky login and protected-service identity. See `soul-gateway/docs/specs/DS016-ploinky-agent-mode.md` and `soul-gateway/docs/specs/DS013-configuration-deployment.md` for details.
+Soul Gateway runs as a Ploinky-managed agent behind Router agent-port convention paths in every host context. Public API traffic goes through the Ploinky router and still uses Soul Gateway API keys; management traffic is protected by Ploinky login and protected-service identity. See `soul-gateway/docs/specs/DS012-ploinky-deployment.md` and `soul-gateway/docs/specs/DS005-authentication-and-credentials.md` for details.
 
 Key invariant:
 
