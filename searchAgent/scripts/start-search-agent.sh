@@ -4,8 +4,8 @@ set -eu
 SEARXNG_BIND="127.0.0.1"
 SEARXNG_PORT="8888"
 SEARXNG_SETTINGS_PATH="${HOME}/searxng/settings.yml"
-SEARXNG_VENV="/usr/local/searxng/searx-pyenv"
-SEARXNG_APP_DIR="/usr/local/searxng/searxng-src"
+SEARXNG_VENV="${SEARXNG_VENV:-/opt/search-agent/searx-pyenv}"
+SEARXNG_APP_DIR="${SEARXNG_APP_DIR:-/opt/search-agent/searxng-src}"
 BROWSER_POOL_PORT="${BROWSER_POOL_PORT:-8890}"
 
 if [ ! -f "${SEARXNG_SETTINGS_PATH}" ]; then
@@ -39,7 +39,7 @@ searxng_pid="$!"
 
 ready=0
 for _ in $(seq 1 60); do
-    if curl -fsS -H 'accept: application/json' "http://${SEARXNG_BIND}:${SEARXNG_PORT}/search?q=ploinky&format=json" >/dev/null 2>&1; then
+    if curl -fsS "http://${SEARXNG_BIND}:${SEARXNG_PORT}/healthz" >/dev/null 2>&1; then
         ready=1
         break
     fi

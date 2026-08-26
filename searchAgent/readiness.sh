@@ -15,11 +15,11 @@ const checks = [
     },
     {
         label: 'SearXNG',
-        url: 'http://127.0.0.1:8888/search?q=ploinky&format=json',
+        url: 'http://127.0.0.1:8888/healthz',
         validate: async (response) => {
-            const payload = await response.json();
-            if (!payload || typeof payload !== 'object' || !Array.isArray(payload.results)) {
-                throw new Error('search response did not include results array');
+            const payload = (await response.text()).trim();
+            if (payload !== 'OK') {
+                throw new Error(`unexpected payload ${JSON.stringify(payload).slice(0, 500)}`);
             }
         },
     },

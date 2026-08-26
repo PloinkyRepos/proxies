@@ -1,6 +1,19 @@
+import { createRequire } from 'node:module';
+import { pathToFileURL } from 'node:url';
+
+const require = createRequire(import.meta.url);
+
 const IDLE_TIMEOUT_MS = 5 * 60_000;
 const DEFAULT_ACQUIRE_TIMEOUT_MS = 30_000;
 const SHUTDOWN_GRACE_MS = 5_000;
+
+export function isBrowserConnected(browser) {
+    if (!browser) return false;
+    if (typeof browser.isConnected === 'function') {
+        return browser.isConnected();
+    }
+    return browser.connected === true;
+}
 
 const USER_AGENTS = [
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
@@ -35,7 +48,10 @@ export class BrowserPool {
     }
 
     async warmUp() {
-        const module = await import('puppeteer-core');
+        // Resolve through CommonJS first so the immutable runtime image's
+        // NODE_PATH module directory is honored, then import the exact file as
+        // ESM. Local development still resolves /code/node_modules normally.
+        const module = await import(pathToFileURL(require.resolve('puppeteer-core')).href);
         this.puppeteer = module.default || module;
 
         for (let i = 0; i < this.poolSize; i += 1) {
@@ -51,10 +67,10 @@ export class BrowserPool {
         if (this.closed) throw new Error('Browser pool is closed.');
         if (signal?.aborted) throw signal.reason || new Error('Aborted.');
 
-        const available = this.slots.find((slot) => !slot.busy && slot.browser?.isConnected());
+        const available = this.slots.find((slot) => !slot.busy && isBrowserConnected(slot.browser));
         if (available) return this.checkout(available, signal);
 
-        const crashed = this.slots.find((slot) => !slot.busy && !slot.browser?.isConnected());
+        const crashed = this.slots.find((slot) => !slot.busy && !isBrowserConnected(slot.browser));
         if (crashed) {
             crashed.browser = await this.launchBrowser();
             return this.checkout(crashed, signal);
@@ -82,7 +98,7 @@ export class BrowserPool {
     }
 
     status() {
-        const available = this.slots.filter((slot) => !slot.busy && slot.browser?.isConnected()).length;
+        const available = this.slots.filter((slot) => !slot.busy && isBrowserConnected(slot.browser)).length;
         const busy = this.slots.filter((slot) => slot.busy).length;
         return {
             total: this.poolSize,
@@ -154,7 +170,7 @@ export class BrowserPool {
     async checkout(slot, signal) {
         if (signal?.aborted) throw signal.reason || new Error('Aborted.');
 
-        if (!slot.browser?.isConnected()) {
+        if (!isBrowserConnected(slot.browser)) {
             slot.browser = await this.launchBrowser();
         }
 
@@ -261,7 +277,7 @@ export class BrowserPool {
         this.idleTimer = setInterval(() => {
             const now = Date.now();
             for (const slot of this.slots) {
-                if (!slot.busy && slot.browser?.isConnected() && now - slot.lastUsed > IDLE_TIMEOUT_MS) {
+                if (!slot.busy && isBrowserConnected(slot.browser) && now - slot.lastUsed > IDLE_TIMEOUT_MS) {
                     slot.browser.close().catch(() => {});
                     slot.browser = null;
                     this.log.info?.('browser pool idle slot closed');
