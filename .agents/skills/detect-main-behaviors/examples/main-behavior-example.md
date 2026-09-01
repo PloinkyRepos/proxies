@@ -52,7 +52,7 @@ Before starting an agent with Docker or Podman, Ploinky builds the complete volu
 | `/code` | The agent code from `.ploinky/code/<agent>`, mounted read-write for the `default` and `dev` profiles and read-only for other profiles. |
 | `/code/node_modules` | The prepared dependency cache, mounted read-only by Docker and provided through a symlink by Podman. |
 | `/Agent/node_modules` | The same prepared dependency cache, mounted read-only by Docker and provided through a symlink by Podman. |
-| `/shared` | `.ploinky/shared`, mounted read-write. |
+| `/shared` | `.data/shared`, mounted read-write. |
 | Configured project path | The configured project folder, normally the workspace root, mounted read-write at the same absolute path used on the host. |
 | `/code/skills` | The agent's skills folder when it exists outside `/code`, mounted by Docker with profile-dependent read-write or read-only access. |
 | Manifest `volumes` | Any host folder named by an absolute path or a path relative to the workspace root, mounted read-write. |
@@ -62,7 +62,7 @@ Before starting an agent with Docker or Podman, Ploinky builds the complete volu
 | Mount | Condition and behavior |
 | --- | --- |
 | `/models`, `/runtime`, and `/Agent/llm-runtime` | Added only for an agent whose manifest enables an LLM runtime. |
-| `<persistentStorage>` | Added when `runtime.resources.persistentStorage` is declared. Its default host location is `.ploinky/data/<key>`. |
+| `<persistentStorage>` | Added when `runtime.resources.persistentStorage` is declared. Its host location is `.data/<key>`. |
 | Agent working folder | `.ploinky/agents/<agent>` is mounted separately as read-write when the configured project-path mount does not already cover it. |
 
 Docker mounts each source directly at its target path. Podman creates a temporary directory tree under `.ploinky/container-runtime`, uses symlinks for the `/Agent` copy and the `/code` tree, mounts the real symlink targets, and starts Node with `--preserve-symlinks`. Under Podman, `node_modules` is a symlink to the cache instead of a nested mount.
