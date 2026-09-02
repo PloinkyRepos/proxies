@@ -7,7 +7,7 @@ SEARXNG_VENV="${SEARXNG_HOME}/searx-pyenv"
 
 if [ ! -x "${SEARXNG_VENV}/bin/python" ] || [ ! -d "${SEARXNG_CLONE_DIR}/searx" ]; then
     echo "ERROR: SearchAgent runtime dependencies are missing from ${SEARXNG_HOME}." >&2
-    echo "Use docker.io/assistos/search-agent:searxng-browser; runtime installation does not require root." >&2
+    echo "Use the immutable SearchAgent image pinned in manifest.json; runtime installation does not require root." >&2
     exit 1
 fi
 

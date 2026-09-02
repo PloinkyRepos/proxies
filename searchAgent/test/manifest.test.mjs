@@ -14,7 +14,7 @@ test('SearchAgent uses the dedicated unprivileged runtime image', async () => {
     const start = await readFile(startUrl, 'utf8');
     const readiness = await readFile(readinessUrl, 'utf8');
 
-    assert.equal(manifest.container, 'docker.io/assistos/search-agent:searxng-browser');
+    assert.equal(manifest.container, 'docker.io/assistos/search-agent@sha256:d366ee752f6065192f9fd8fa03647b8fba33c2ebdb879a085dee5498fba82f0e');
     assert.equal(manifest.profiles.default.install, 'sh /code/scripts/install-searxng.sh');
     assert.doesNotMatch(install, /\b(?:apt-get|apk|dnf|yum)\b/);
     assert.doesNotMatch(install, /\bgit\s+(?:clone|pull|fetch)\b/);

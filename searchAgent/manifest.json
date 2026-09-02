@@ -1,5 +1,5 @@
 {
-  "container": "docker.io/assistos/search-agent:searxng-browser",
+  "container": "docker.io/assistos/search-agent@sha256:d366ee752f6065192f9fd8fa03647b8fba33c2ebdb879a085dee5498fba82f0e",
   "startup": "manual",
   "about": "SearchAgent exposes normalized provider search through MCP tools.",
   "agent": "sh /code/scripts/start-search-agent.sh",
