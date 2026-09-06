@@ -9,7 +9,7 @@ Default Local LLM combines one loopback [llama-server](wiki.html#definition-llam
 
 ## Core Content
 
-Startup must verify the configured model file before starting either process. It must launch llama-server with the configured executable, model path, loopback host, port, context size, and optional thread count, and must direct llama-server output to the configured log file.
+Startup must validate generation and prompt-processing thread counts and verify the configured model file before starting either process. It must launch llama-server with the configured executable, model path, loopback host, port, context size, and both thread counts, and must direct llama-server output to the configured log file. Generation must default to two threads and prompt processing must inherit that effective count unless independently configured. These are inference-parallelism settings, not process CPU quotas or reserved CPU cores.
 
 Startup must poll `http://127.0.0.1:${LLAMA_SERVER_PORT}/health` for up to 120 one-second attempts. It must fail with a diagnostic log tail when llama-server exits before readiness, and it must not start AgentServer until the health endpoint succeeds. The startup timeout boundary is the fixed attempt count; a process that remains alive but never becomes healthy does not acquire an additional success path.
 

@@ -15,6 +15,6 @@ JavaScript must use ES modules and four-space indentation. JSON must use two-spa
 
 Errors written for runtime diagnosis must use standard error. Buffered responses and streaming chunks must use standard output so AgentServer can forward them without mixed log data. Error messages must not include more upstream response content than needed for diagnosis.
 
-Tests must use Node's built-in test runner, keep request forwarding deterministic through injected fetch behavior, and cover valid envelope parsing, missing messages, successful forwarding, and non-2xx upstream behavior. The agent suite must run through `node --test chat-completions.test.mjs`.
+Tests must use Node's built-in test runner, keep request forwarding deterministic through injected fetch behavior, and cover valid envelope parsing, missing messages, successful forwarding, and non-2xx upstream behavior. Startup tests must execute the shell with isolated fake inference and AgentServer processes and verify thread arguments, defaults, invalid values, and the missing-model path without loading a model. The agent suite must run through `node --test *.test.mjs`.
 
 Documentation, specifications, comments, and user-facing strings must be English. Behavior changes must update the relevant HTML explanation and DS contract. DS prose must remain unwrapped in source, use only `Introduction` and `Core Content` as top-level content sections, and avoid Q&A or conclusion sections.

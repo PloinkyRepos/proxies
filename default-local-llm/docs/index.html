@@ -44,11 +44,13 @@
         <tr><td><code>LLAMA_SERVER_PORT</code></td><td><code>8080</code>; selects the loopback inference and health port.</td></tr>
         <tr><td><code>LLAMA_SERVER_BIN</code></td><td><code>llama-server</code>; selects the executable.</td></tr>
         <tr><td><code>LLAMA_CTX_SIZE</code></td><td><code>4096</code>; supplies <code>--ctx-size</code>.</td></tr>
-        <tr><td><code>LLAMA_THREADS</code></td><td>Empty; when set, supplies <code>--threads</code>.</td></tr>
+        <tr><td><code>LLAMA_THREADS</code></td><td><code>2</code>; supplies <code>--threads</code> for generation. Unset or empty values use this default.</td></tr>
+        <tr><td><code>LLAMA_THREADS_BATCH</code></td><td>Inherits the effective <code>LLAMA_THREADS</code> when unset or empty; supplies <code>--threads-batch</code> for prompt processing.</td></tr>
         <tr><td><code>LLAMA_LOG</code></td><td><code>/tmp/llama-server.log</code>; stores startup and inference-process logs.</td></tr>
         <tr><td><code>PLOINKY_AGENT_LIB_DIR</code></td><td><code>/Agent</code>; locates <code>server/AgentServer.sh</code>.</td></tr>
       </tbody>
     </table>
+    <p>Thread settings must be decimal integers from 1 through 2147483647, without leading zeroes. Invalid values fail before either service starts. The conservative two-thread default reduces inference competition with other workspace services; operators can tune generation and prompt processing independently through the agent profile. These settings limit inference parallelism, not total process CPU usage: they do not reserve cores or provide a cgroup CPU quota. A strict quota requires a runtime with independently enforced agent cgroups.</p>
 
     <h2>Failure behavior and limits</h2>
     <p>Malformed handler input writes a concise error to standard error and exits with status 2. An upstream non-2xx response, missing streaming body, connection failure, or invalid non-streaming JSON writes an upstream failure message and exits with status 1; AgentServer converts a non-zero handler exit into a server error. The non-streaming helper includes at most the first 200 characters of the upstream error body.</p>

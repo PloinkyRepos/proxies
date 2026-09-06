@@ -21,9 +21,12 @@ For `stream: true`, the handler must require a successful upstream response with
 | `LLAMA_SERVER_PORT` | Selects the loopback llama-server port and defaults to `8080`. |
 | `LLAMA_SERVER_BIN` | Selects the inference executable and defaults to `llama-server`. |
 | `LLAMA_CTX_SIZE` | Supplies `--ctx-size` and defaults to `4096`. |
-| `LLAMA_THREADS` | Supplies `--threads` only when non-empty. |
+| `LLAMA_THREADS` | Supplies `--threads` for generation; unset or empty values default to `2`. |
+| `LLAMA_THREADS_BATCH` | Supplies `--threads-batch` for prompt processing; unset or empty values inherit the effective `LLAMA_THREADS`. |
 | `LLAMA_LOG` | Selects the llama-server log and defaults to `/tmp/llama-server.log`. |
 | `PLOINKY_AGENT_LIB_DIR` | Locates AgentServer and defaults to `/Agent`. |
+
+Both thread settings must be decimal positive integers from 1 through 2147483647 without leading zeroes. Invalid values must produce a diagnostic and a non-zero exit before either service starts. The generation default is deliberately conservative for shared workspaces; operators may independently tune both counts. These settings constrain inference parallelism but must not be represented as a hard process CPU quota or CPU-core reservation.
 
 The manifest must declare Chat Completions streaming support and must configure readiness with `healthcheck.sh`, a five-second interval, a ten-second timeout, and a failure threshold of 60. The readiness script must fail unless the configured loopback `/health` request succeeds.
 
